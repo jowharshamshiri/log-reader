@@ -1,0 +1,14 @@
+body {
+    font-family: var(--vscode-editor-font-family);
+    font-size: var(--vscode-editor-font-size);
+    padding: 0 20px;
+}
+
+#toggleMask {
+    margin-bottom: 10px;
+}
+
+#logContent {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}

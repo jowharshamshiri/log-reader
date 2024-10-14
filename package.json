@@ -1,0 +1,80 @@
+{
+	"name": "logmask",
+	"displayName": "Log Mask",
+	"description": "Masks redundant information in log files.",
+	"version": "0.0.1",
+	"publisher": "jowharshamshiri@gmail.com",
+	"private": true,
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jowharshamnshiri/logmask.git"
+	},
+	"engines": {
+		"vscode": "^1.74.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "logMask.toggleMaskOn",
+				"title": "Toggle Log Mask On",
+				"icon": {
+					"light": "media/images/logmask_light.svg",
+					"dark": "media/images/logmask_dark.svg"
+				}
+			},
+			{
+				"command": "logMask.toggleMaskOff",
+				"title": "Toggle Log Mask Off",
+				"icon": {
+					"light": "media/images/logmask_light_active.svg",
+					"dark": "media/images/logmask_dark_active.svg"
+				}
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"when": "resourceScheme == file && resourceExtname == .log && !logMaskActive",
+					"command": "logMask.toggleMaskOn",
+					"group": "navigation"
+				},
+				{
+					"when": "resourceScheme == file && resourceExtname == .log && logMaskActive",
+					"command": "logMask.toggleMaskOff",
+					"group": "navigation"
+				}
+			]
+		},
+		"customEditors": [
+			{
+				"viewType": "logMask.logViewer",
+				"displayName": "Log Viewer",
+				"selector": [
+					{
+						"filenamePattern": "*.log"
+					}
+				]
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint \"src/**/*.ts\"",
+		"watch": "tsc -w -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "^20",
+		"@types/vscode": "^1.73.0",
+		"@typescript-eslint/eslint-plugin": "^7.14.0",
+		"@typescript-eslint/parser": "^7.14.0",
+		"eslint": "^8.26.0",
+		"typescript": "^5.6.2"
+	}
+}
