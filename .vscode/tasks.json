@@ -2,8 +2,10 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "npm",
-			"script": "watch",
+			"label": "bun: watch",
+			"type": "shell",
+			"command": "bun",
+			"args": ["run", "watch"],
 			"problemMatcher": "$tsc-watch",
 			"isBackground": true,
 			"presentation": {
@@ -12,6 +14,25 @@
 			"group": {
 				"kind": "build",
 				"isDefault": true
+			},
+			"options": {
+				"env": {
+					"PATH": "${env:PATH}:/usr/local/bin:/opt/homebrew/bin:/Users/bahram/.bun/bin"
+				}
+			}
+		},
+		{
+			"label": "bun: test",
+			"type": "shell",
+			"command": "bun",
+			"args": ["run", "compile"],
+			"problemMatcher": ["$tsc"],
+			"group": "build",
+			"label": "bun: compile",
+			"options": {
+				"env": {
+					"PATH": "${env:PATH}:/usr/local/bin:/opt/homebrew/bin:/Users/bahram/.bun/bin"
+				}
 			}
 		}
 	]

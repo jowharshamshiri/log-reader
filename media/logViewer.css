@@ -1,14 +1,27 @@
 body {
-    font-family: var(--vscode-editor-font-family);
-    font-size: var(--vscode-editor-font-size);
-    padding: 0 20px;
-}
-
-#toggleMask {
-    margin-bottom: 10px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 #logContent {
-    white-space: pre-wrap;
-    word-wrap: break-word;
+    font-family: var(--vscode-editor-font-family);
+    font-size: var(--vscode-editor-font-size);
+    line-height: var(--vscode-editor-line-height, 1.5);
+    white-space: pre;
+    word-wrap: normal;
+    overflow-x: auto;
+    padding: 0;
+    margin: 0;
+    background-color: var(--vscode-editor-background);
+    color: var(--vscode-editor-foreground);
+}
+
+.log-line {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.log-line:hover {
+    background-color: var(--vscode-editor-hoverHighlightBackground);
 }

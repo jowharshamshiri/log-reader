@@ -34,12 +34,7 @@ export class LogFileEditorProvider implements vscode.CustomTextEditorProvider {
         // Set the context for the button icon
         vscode.commands.executeCommand('setContext', 'logMaskActive', this.isMasked);
 
-        if (this.isMasked) {
-            const processedContent = processLogContent(this.currentDocument.getText());
-            this.currentWebviewPanel.webview.postMessage({ type: 'update', text: processedContent, isMasked: true });
-        } else {
-            this.updateWebview();
-        }
+        this.updateWebview();
     }
 
     public async resolveCustomTextEditor(
@@ -75,9 +70,24 @@ export class LogFileEditorProvider implements vscode.CustomTextEditorProvider {
             return;
         }
 
+        const content = this.currentDocument.getText();
+        let processedContent: string[];
+
+        if (this.isMasked) {
+            processedContent = processLogContent(content).split('\n');
+        } else {
+            processedContent = content.split('\n');
+        }
+
+        // Ensure both masked and unmasked content have the same number of lines
+        const lineCount = Math.max(content.split('\n').length, processedContent.length);
+        while (processedContent.length < lineCount) {
+            processedContent.push('');
+        }
+
         this.currentWebviewPanel.webview.postMessage({
             type: 'update',
-            text: this.currentDocument.getText(),
+            text: processedContent.join('\n'),
             isMasked: this.isMasked
         });
     }
